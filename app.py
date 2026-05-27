@@ -6,7 +6,7 @@ import pickle
 
 st.set_page_config(page_title="Net-Zero Carbon Architect", layout="wide")
 
-st.title("🏢 Integrated Building Performance Optimization Platform")
+st.title("Building performance optimization")
 st.markdown("This system chains geometric layouts with structural material neural networks to predict energy outcomes.")
 
 # 1. Load Meta Data for Dropdown Selectors
@@ -47,11 +47,11 @@ def load_all_assets():
 try:
     enc_l, enc_m, ml_layout, ml_mat = load_all_assets()
 except FileNotFoundError:
-    st.error("⚠️ Missing model components! Please run `train_models.py` first.")
+    st.error("run `train_models.py` first.")
     st.stop()
 
 # 3. Sidebar UI Layout
-st.sidebar.header("📐 Step 1: Geometric Configuration")
+st.sidebar.header(" Geometric Configuration")
 wwr = st.sidebar.slider("Window to Wall Ratio (%)", 10, 50, 30, 1)
 orient = st.sidebar.slider("Site Orientation (°)", 0, 270, 180, 90)
 w_open = st.sidebar.slider("% External Window Opens", 50, 80, 60, 1)
@@ -59,7 +59,7 @@ facade = st.sidebar.selectbox("Facade Layout Matrix", options=facades)
 shading = st.sidebar.selectbox("Local Shading Framework", options=shadings)
 
 st.sidebar.markdown("---")
-st.sidebar.header("🧱 Step 2: Structural Materials")
+st.sidebar.header("Structural Materials")
 
 def_wall_idx = ext_walls.index('AAC + INSULATION')
 def_roof_idx = roofs.index('RCC+INSULATION+TILE')
@@ -104,18 +104,18 @@ final_cooling = geo_base_cooling * mult_cooling
 final_discom = geo_base_discom * mult_discom
 
 # 5. USER INTERFACE METRICS PRESENTATION
-st.subheader("🎯 Cumulative Neural Network System Outputs")
+st.subheader("Cumulative System Outputs")
 m1, m2, m3 = st.columns(3)
 
 with m1:
-    st.metric(label="🔌 Cumulative Site Energy", value=f"{final_total:,.2f} kWh", delta=f"{(mult_total-1)*100:+.1f}% Material Effect")
+    st.metric(label="Cumulative Site Energy", value=f"{final_total:,.2f} kWh", delta=f"{(mult_total-1)*100:+.1f}% Material Effect")
 with m2:
-    st.metric(label="❄️ Cumulative Cooling Demand", value=f"{final_cooling:,.2f} kWh", delta=f"{(mult_cooling-1)*100:+.1f}% Material Effect", delta_color="inverse")
+    st.metric(label="Cumulative Cooling Demand", value=f"{final_cooling:,.2f} kWh", delta=f"{(mult_cooling-1)*100:+.1f}% Material Effect", delta_color="inverse")
 with m3:
-    st.metric(label="🌡️ Thermal Discomfort", value=f"{final_discom:,.1f} Hours", delta=f"{(mult_discom-1)*100:+.1f}% Material Effect", delta_color="inverse")
+    st.metric(label="Thermal Discomfort", value=f"{final_discom:,.1f} Hours", delta=f"{(mult_discom-1)*100:+.1f}% Material Effect", delta_color="inverse")
 
 st.markdown("---")
-with st.expander("🔍 See Neural Network Systems Scaling Logic"):
+with st.expander("See Systems Scaling Logic"):
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown(f"**Stage 1: Neural Geometric Baseline:** `{geo_base_total:,.2f} kWh`")
